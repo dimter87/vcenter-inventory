@@ -1,0 +1,19 @@
+---
+- name: Check VMware collection
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Display VMware collection version
+      ansible.builtin.debug:
+        msg: "Checking VMware collection availability"
+
+    - name: Test VMware module availability
+      community.vmware.vmware_about_info:
+        hostname: "127.0.0.1"
+        username: "test"
+        password: "test"
+        validate_certs: false
+      register: vmware_test
+      ignore_errors: true
