@@ -1,3 +1,4 @@
+
 ---
 - name: Test vCenter connectivity
   hosts: localhost
@@ -17,3 +18,4 @@
     - name: Display vCenter version
       ansible.builtin.debug:
         msg: "Successfully connected to vCenter."
+
