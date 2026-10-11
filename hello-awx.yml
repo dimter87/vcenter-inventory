@@ -1,0 +1,11 @@
+
+---
+- name: Test AWX execution
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Confirm AWX is working
+      ansible.builtin.debug:
+        msg: "Success! AWX is running my Ansible playbook."
