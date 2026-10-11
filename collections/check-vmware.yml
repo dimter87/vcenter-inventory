@@ -1,19 +1,19 @@
 ---
-- name: Check VMware collection
+- name: Test vCenter connectivity
   hosts: localhost
   connection: local
   gather_facts: false
 
   tasks:
-    - name: Display VMware collection version
-      ansible.builtin.debug:
-        msg: "Checking VMware collection availability"
-
-    - name: Test VMware module availability
+    - name: Read vCenter API information
       community.vmware.vmware_about_info:
-        hostname: "127.0.0.1"
-        username: "test"
-        password: "test"
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
         validate_certs: false
-      register: vmware_test
-      ignore_errors: true
+      register: vcenter_info
+      no_log: true
+
+    - name: Display vCenter version
+      ansible.builtin.debug:
+        msg: "Successfully connected to vCenter."
